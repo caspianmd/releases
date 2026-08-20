@@ -1,1 +1,4 @@
-# releases
+- `Caspian-Setup-<version>.exe` — Windows installer
+- `Caspian-<version>.zip` — macOS app, zipped
+- `Caspian-<version>.tar.gz` — Linux archive (no auto-update; tar.gz isn't a self-updating format)
+- `latest.yml`, `latest-mac.yml` — update metadata electron-updater reads to detect a new version

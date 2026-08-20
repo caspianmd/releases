@@ -1,0 +1,10 @@
+# Installer builds and update metadata belong on this repo's GitHub Releases
+# (attached assets), not on the main branch — see README. Ignored here so a
+# local copy kept around for reference never gets committed by accident.
+*.exe
+*.dmg
+*.zip
+*.tar.gz
+*.AppImage
+*.deb
+latest*.yml
