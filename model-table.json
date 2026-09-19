@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "updated": "2026-09-19",
+  "_comment": "Live pricing/limits table read by the Caspian app for its pre-flight cost estimate. Edit and push to main - no app release needed. pricing: USD per million tokens plus assumed output tokens/sec. capability: context window and max output tokens. Models not listed use defaults.",
+  "defaults": {
+    "pricing": {
+      "inputPerM": 3,
+      "outputPerM": 15,
+      "tokensPerSec": 60
+    },
+    "capability": {
+      "contextWindow": 128000,
+      "maxOutputTokens": 8000
+    }
+  },
+  "openRouterVendors": {
+    "anthropic": "anthropic",
+    "openai": "openai",
+    "google": "gemini"
+  },
+  "pricing": {
+    "anthropic": {
+      "claude-opus-5": {
+        "inputPerM": 5,
+        "outputPerM": 25,
+        "tokensPerSec": 40
+      },
+      "claude-opus-4-8": {
+        "inputPerM": 5,
+        "outputPerM": 25,
+        "tokensPerSec": 40
+      },
+      "claude-opus-4-7": {
+        "inputPerM": 5,
+        "outputPerM": 25,
+        "tokensPerSec": 40
+      },
+      "claude-sonnet-5": {
+        "inputPerM": 2,
+        "outputPerM": 10,
+        "tokensPerSec": 60
+      },
+      "claude-sonnet-4-6": {
+        "inputPerM": 3,
+        "outputPerM": 15,
+        "tokensPerSec": 60
+      },
+      "claude-fable-5-1": {
+        "inputPerM": 10,
+        "outputPerM": 50,
+        "tokensPerSec": 35
+      },
+      "claude-fable-5": {
+        "inputPerM": 10,
+        "outputPerM": 50,
+        "tokensPerSec": 35
+      },
+      "claude-haiku-4-5-20251001": {
+        "inputPerM": 1,
+        "outputPerM": 5,
+        "tokensPerSec": 120
+      }
+    },
+    "openai": {
+      "gpt-6-astra": {
+        "inputPerM": 10,
+        "outputPerM": 50,
+        "tokensPerSec": 40
+      },
+      "gpt-5.6-sol": {
+        "inputPerM": 4,
+        "outputPerM": 20,
+        "tokensPerSec": 55
+      },
+      "gpt-5.6-terra": {
+        "inputPerM": 2,
+        "outputPerM": 12,
+        "tokensPerSec": 65
+      },
+      "gpt-5.6-luna": {
+        "inputPerM": 0.2,
+        "outputPerM": 1.2,
+        "tokensPerSec": 130
+      },
+      "gpt-5.5-instant": {
+        "inputPerM": 0.25,
+        "outputPerM": 1.5,
+        "tokensPerSec": 125
+      },
+      "gpt-5.5": {
+        "inputPerM": 5,
+        "outputPerM": 30,
+        "tokensPerSec": 50
+      },
+      "gpt-5.4-mini": {
+        "inputPerM": 0.75,
+        "outputPerM": 4.5,
+        "tokensPerSec": 110
+      },
+      "gpt-5.4-thinking": {
+        "inputPerM": 2,
+        "outputPerM": 16,
+        "tokensPerSec": 45
+      },
+      "gpt-5": {
+        "inputPerM": 1.25,
+        "outputPerM": 10,
+        "tokensPerSec": 60
+      }
+    },
+    "gemini": {
+      "gemini-3.8-flash": {
+        "inputPerM": 0.75,
+        "outputPerM": 3.75,
+        "tokensPerSec": 110
+      },
+      "gemini-3.7-flash": {
+        "inputPerM": 0.75,
+        "outputPerM": 3.75,
+        "tokensPerSec": 110
+      },
+      "gemini-3.5-flash-lite": {
+        "inputPerM": 0.3,
+        "outputPerM": 2.5,
+        "tokensPerSec": 140
+      },
+      "gemini-3.5-flash": {
+        "inputPerM": 1.5,
+        "outputPerM": 9,
+        "tokensPerSec": 100
+      },
+      "gemini-3.1-pro-preview": {
+        "inputPerM": 2,
+        "outputPerM": 12,
+        "tokensPerSec": 55
+      },
+      "gemini-2.5-pro": {
+        "inputPerM": 1.25,
+        "outputPerM": 10,
+        "tokensPerSec": 55
+      }
+    }
+  },
+  "capability": {
+    "anthropic": {
+      "claude-opus-5": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-opus-4-8": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-opus-4-7": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-sonnet-5": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-sonnet-4-6": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-fable-5-1": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-fable-5": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-haiku-4-5-20251001": {
+        "contextWindow": 200000,
+        "maxOutputTokens": 64000
+      }
+    },
+    "openai": {
+      "gpt-6-astra": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-5.6-sol": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-5.6-terra": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-5.6-luna": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-5.5-instant": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-5.5": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-5.4-mini": {
+        "contextWindow": 400000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-5.4-thinking": {
+        "contextWindow": 400000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-5": {
+        "contextWindow": 400000,
+        "maxOutputTokens": 128000
+      }
+    },
+    "gemini": {
+      "gemini-3.8-flash": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "gemini-3.7-flash": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "gemini-3.5-flash-lite": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "gemini-3.5-flash": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "gemini-3.1-pro-preview": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "gemini-2.5-pro": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      }
+    }
+  }
+}
