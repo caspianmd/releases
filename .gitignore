@@ -8,3 +8,4 @@
 *.AppImage
 *.deb
 latest*.yml
+*.tgz
