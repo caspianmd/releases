@@ -5,8 +5,9 @@ name: Publish CLI to npm
 # exact file to npm as @caspianmd/caspian, so `npm install -g @caspianmd/caspian` always matches the
 # app's latest release.
 #
-# Needs one repository secret: NPM_TOKEN — an npm access token for the caspianmd account that
-# can publish @caspianmd/caspian (Settings → Secrets and variables → Actions).
+# No token: npm Trusted Publishing. @caspianmd/caspian's settings on npmjs.com name this repo and
+# this workflow file as its trusted publisher; the job proves it's that workflow with a GitHub
+# OIDC token (id-token: write below), and npm publishes with provenance. Nothing to rotate or leak.
 on:
   release:
     types: [published]
@@ -18,6 +19,7 @@ on:
 
 permissions:
   contents: read
+  id-token: write # for npm Trusted Publishing
 
 jobs:
   publish:
@@ -25,10 +27,13 @@ jobs:
     env:
       TAG: ${{ github.event.release.tag_name || inputs.tag }}
     steps:
+      # No registry-url: that writes an .npmrc pointing at a token, and there is none.
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: https://registry.npmjs.org
+
+      # Trusted Publishing needs npm 11.5.1 or newer; Node 22 ships with npm 10.
+      - run: npm install -g npm@^11.5.1
 
       - name: Find the CLI package on the release
         id: pkg
@@ -54,15 +59,10 @@ jobs:
       - name: Publish to npm
         if: steps.pkg.outputs.skip != 'true'
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           FILE: ${{ steps.pkg.outputs.file }}
           VERSION: ${{ steps.pkg.outputs.version }}
           PRERELEASE: ${{ github.event.release.prerelease || false }}
         run: |
-          if [ -z "$NODE_AUTH_TOKEN" ]; then
-            echo "::error::The NPM_TOKEN secret isn't set on this repository."
-            exit 1
-          fi
           if npm view "@caspianmd/caspian@$VERSION" version >/dev/null 2>&1; then
             echo "::notice::@caspianmd/caspian@$VERSION is already on npm — nothing to do."
             exit 0

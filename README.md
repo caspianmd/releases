@@ -2,7 +2,7 @@
 - `Caspian-<version>.zip` — macOS app, zipped
 - `Caspian-<version>.tar.gz` — Linux archive (no auto-update; tar.gz isn't a self-updating format)
 - `latest.yml`, `latest-mac.yml` — update metadata electron-updater reads to detect a new version
-- `caspianmd-caspian-<version>.tgz` — the `caspian` command-line tool's npm package (the desktop app bundles the same CLI). Publishing a release here runs `.github/workflows/publish-cli.yml`, which publishes this file to npm as `@caspianmd/caspian`; it needs the `NPM_TOKEN` repository secret.
+- `caspianmd-caspian-<version>.tgz` — the `caspian` command-line tool's npm package (the desktop app bundles the same CLI). Publishing a release here runs `.github/workflows/publish-cli.yml`, which publishes this file to npm as `@caspianmd/caspian`; it uses npm Trusted Publishing (no token; set up on the package's settings page on npmjs.com).
 
 ## Live model table
 
