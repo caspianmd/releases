@@ -1,12 +1,12 @@
 name: Publish CLI to npm
 
 # Every release published here carries the caspian CLI's npm package,
-# caspianmd-cli-<version>.tgz, built from the same tag as the desktop app. This publishes that
-# exact file to npm as @caspianmd/cli, so `npm install -g @caspianmd/cli` always matches the
+# caspianmd-caspian-<version>.tgz, built from the same tag as the desktop app. This publishes that
+# exact file to npm as @caspianmd/caspian, so `npm install -g @caspianmd/caspian` always matches the
 # app's latest release.
 #
 # Needs one repository secret: NPM_TOKEN — an npm access token for the caspianmd account that
-# can publish @caspianmd/cli (Settings → Secrets and variables → Actions).
+# can publish @caspianmd/caspian (Settings → Secrets and variables → Actions).
 on:
   release:
     types: [published]
@@ -36,12 +36,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           mkdir pkg
-          if ! gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern 'caspianmd-cli-*.tgz' --dir pkg; then
-            echo "::notice::Release $TAG has no caspianmd-cli-*.tgz — nothing to publish."
+          if ! gh release download "$TAG" --repo "$GITHUB_REPOSITORY" --pattern 'caspianmd-caspian-*.tgz' --dir pkg; then
+            echo "::notice::Release $TAG has no caspianmd-caspian-*.tgz — nothing to publish."
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          file=$(ls pkg/caspianmd-cli-*.tgz | head -n 1)
+          file=$(ls pkg/caspianmd-caspian-*.tgz | head -n 1)
           version=$(tar -xOzf "$file" package/package.json | node -p "JSON.parse(require('fs').readFileSync(0, 'utf8')).version")
           if [ "v$version" != "$TAG" ]; then
             echo "::error::$file is version $version but the release is $TAG — not publishing."
@@ -62,14 +62,14 @@ jobs:
             echo "::error::The NPM_TOKEN secret isn't set on this repository."
             exit 1
           fi
-          if npm view "@caspianmd/cli@$VERSION" version >/dev/null 2>&1; then
-            echo "::notice::@caspianmd/cli@$VERSION is already on npm — nothing to do."
+          if npm view "@caspianmd/caspian@$VERSION" version >/dev/null 2>&1; then
+            echo "::notice::@caspianmd/caspian@$VERSION is already on npm — nothing to do."
             exit 0
           fi
-          # A pre-release goes to the "next" tag so `npm install -g @caspianmd/cli` doesn't pick it up.
+          # A pre-release goes to the "next" tag so `npm install -g @caspianmd/caspian` doesn't pick it up.
           if [ "$PRERELEASE" = "true" ]; then
             npm publish "$FILE" --access public --tag next
           else
             npm publish "$FILE" --access public
           fi
-          echo "::notice::Published @caspianmd/cli@$VERSION"
+          echo "::notice::Published @caspianmd/caspian@$VERSION"
