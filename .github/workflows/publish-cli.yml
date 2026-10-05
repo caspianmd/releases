@@ -41,7 +41,8 @@ jobs:
             echo "skip=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          file=$(ls pkg/caspianmd-caspian-*.tgz | head -n 1)
+          # "./" so npm reads it as a local file, not a GitHub "user/repo" shorthand.
+          file=./$(ls pkg/caspianmd-caspian-*.tgz | head -n 1)
           version=$(tar -xOzf "$file" package/package.json | node -p "JSON.parse(require('fs').readFileSync(0, 'utf8')).version")
           if [ "v$version" != "$TAG" ]; then
             echo "::error::$file is version $version but the release is $TAG — not publishing."
