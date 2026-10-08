@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-09-19",
-  "_comment": "Live pricing/limits table read by the Caspian app for its pre-flight cost estimate. Edit and push to main - no app release needed. pricing: USD per million tokens plus assumed output tokens/sec. capability: context window and max output tokens. Models not listed use defaults.",
+  "updated": "2026-10-08",
+  "_comment": "Live pricing/limits table read by the Caspian app for its pre-flight cost estimate. Edit and push to main - no app release needed. pricing: USD per million tokens plus assumed output tokens/sec. capability: context window and max output tokens. codingIndex: Artificial Analysis Coding Agent Index v1.1 (snapshot 2026-10-07), each model in its own vendor CLI at its best listed reasoning setting - the CLI ranks models by it for its strongest tier. toolModels: what a CLI tool's own model aliases run, as vendor/model. Models not listed use defaults.",
   "defaults": {
     "pricing": {
       "inputPerM": 3,
@@ -106,6 +106,21 @@
         "inputPerM": 1.25,
         "outputPerM": 10,
         "tokensPerSec": 60
+      },
+      "gpt-6.1-sol": {
+        "inputPerM": 2,
+        "outputPerM": 10,
+        "tokensPerSec": 105
+      },
+      "gpt-6-sol": {
+        "inputPerM": 2,
+        "outputPerM": 10,
+        "tokensPerSec": 105
+      },
+      "gpt-6-luna": {
+        "inputPerM": 0.1,
+        "outputPerM": 0.5,
+        "tokensPerSec": 140
       }
     },
     "gemini": {
@@ -138,6 +153,18 @@
         "inputPerM": 1.25,
         "outputPerM": 10,
         "tokensPerSec": 55
+      }
+    },
+    "xai": {
+      "grok-4.7": {
+        "inputPerM": 2,
+        "outputPerM": 6,
+        "tokensPerSec": 60
+      },
+      "grok-4.6": {
+        "inputPerM": 2,
+        "outputPerM": 6,
+        "tokensPerSec": 60
       }
     }
   },
@@ -239,6 +266,40 @@
         "contextWindow": 1048576,
         "maxOutputTokens": 65536
       }
+    }
+  },
+  "codingIndex": {
+    "anthropic": {
+      "claude-sonnet-5-5": 68.4,
+      "claude-opus-5-5": 66,
+      "claude-fable-5-1": 62.2,
+      "claude-opus-5": 59.7
+    },
+    "openai": {
+      "gpt-6.1-sol": 62.9,
+      "gpt-6-astra": 61.6,
+      "gpt-6-sol": 56.7,
+      "gpt-5.6-sol": 54.6,
+      "gpt-5.6-luna": 43.2,
+      "gpt-6-luna": 41.1
+    },
+    "gemini": {
+      "gemini-3.8-flash": 41.9
+    },
+    "xai": {
+      "grok-4.7": 56.3,
+      "grok-4.6": 47
+    }
+  },
+  "toolModels": {
+    "gemini": {
+      "pro": "gemini/gemini-3.1-pro-preview",
+      "flash": "gemini/gemini-3.8-flash",
+      "flash-lite": "gemini/gemini-3.5-flash-lite"
+    },
+    "devin": {
+      "opus": "anthropic/claude-opus-5-5",
+      "sonnet": "anthropic/claude-sonnet-5-5"
     }
   }
 }
