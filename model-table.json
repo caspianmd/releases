@@ -1,7 +1,22 @@
 {
   "schemaVersion": 1,
-  "updated": "2026-10-08",
-  "_comment": "Live pricing/limits table read by the Caspian app for its pre-flight cost estimate. Edit and push to main - no app release needed. pricing: USD per million tokens plus assumed output tokens/sec. capability: context window and max output tokens. codingIndex: Artificial Analysis Coding Agent Index v1.1 (snapshot 2026-10-07), each model in its own vendor CLI at its best listed reasoning setting - the CLI ranks models by it for its strongest tier. toolModels: what a CLI tool's own model aliases run, as vendor/model. Models not listed use defaults.",
+  "updated": "2026-11-01",
+  "_comment": "Live pricing/limits table read by the Caspian app for its pre-flight cost estimate. Edit and push to main - no app release needed. pricing: USD per million tokens plus assumed output tokens/sec (standard tier; tiered pricing is approximated at the base rate). capability: context window and max output tokens. codingIndex: Artificial Analysis Coding Agent Index v1.1 (snapshot 2026-10-07), each model in its own vendor CLI at its best listed reasoning setting - the CLI ranks models by it for its strongest tier. toolModels: fixed model aliases used by a CLI, as vendor/model. Cursor Auto and Devin private/dynamic aliases cannot be priced to one exact model. Models not listed use defaults.",
+  "pricingNotes": {
+    "gemini": {
+      "gemini-4-argon": "Introductory Standard pricing $2/$10 per million input/output tokens through 2026-11-30; $4/$20 from 2026-12-01.",
+      "gemini-3.8-flash": "Standard pricing $0.75/$3.75 through 2026-12-31; $1.50/$7.50 from 2027-01-01."
+    },
+    "anthropic": {
+      "claude-haiku-5-5": "Base price $0.10/$0.50 per million input/output tokens for prompts up to 100K; higher rates apply above 100K."
+    },
+    "xai": {
+      "grok-4.7,grok-4.6,grok-4.5": "Long-context requests (over 200K input tokens) use higher per-token rates; estimates use standard short-context pricing."
+    },
+    "devin": {
+      "swe,gpt,codex": "Private or dynamic Devin models; no fixed underlying model for accurate price/context lookup."
+    }
+  },
   "defaults": {
     "pricing": {
       "inputPerM": 3,
@@ -16,10 +31,16 @@
   "openRouterVendors": {
     "anthropic": "anthropic",
     "openai": "openai",
-    "google": "gemini"
+    "google": "gemini",
+    "x-ai": "xai"
   },
   "pricing": {
     "anthropic": {
+      "claude-opus-5-5": {
+        "inputPerM": 4,
+        "outputPerM": 20,
+        "tokensPerSec": 40
+      },
       "claude-opus-5": {
         "inputPerM": 5,
         "outputPerM": 25,
@@ -39,6 +60,16 @@
         "inputPerM": 2,
         "outputPerM": 10,
         "tokensPerSec": 60
+      },
+      "claude-sonnet-5-5": {
+        "inputPerM": 2,
+        "outputPerM": 10,
+        "tokensPerSec": 60
+      },
+      "claude-haiku-5-5": {
+        "inputPerM": 0.1,
+        "outputPerM": 0.5,
+        "tokensPerSec": 140
       },
       "claude-sonnet-4-6": {
         "inputPerM": 3,
@@ -112,6 +143,11 @@
         "outputPerM": 10,
         "tokensPerSec": 105
       },
+      "gpt-6.1-terra": {
+        "inputPerM": 1,
+        "outputPerM": 5,
+        "tokensPerSec": 90
+      },
       "gpt-6-sol": {
         "inputPerM": 2,
         "outputPerM": 10,
@@ -124,6 +160,11 @@
       }
     },
     "gemini": {
+      "gemini-4-argon": {
+        "inputPerM": 2,
+        "outputPerM": 10,
+        "tokensPerSec": 45
+      },
       "gemini-3.8-flash": {
         "inputPerM": 0.75,
         "outputPerM": 3.75,
@@ -133,6 +174,16 @@
         "inputPerM": 0.75,
         "outputPerM": 3.75,
         "tokensPerSec": 110
+      },
+      "gemini-3.6-flash": {
+        "inputPerM": 0.75,
+        "outputPerM": 3.75,
+        "tokensPerSec": 110
+      },
+      "gemini-3.1-flash-lite": {
+        "inputPerM": 0.25,
+        "outputPerM": 1.5,
+        "tokensPerSec": 140
       },
       "gemini-3.5-flash-lite": {
         "inputPerM": 0.3,
@@ -165,11 +216,20 @@
         "inputPerM": 2,
         "outputPerM": 6,
         "tokensPerSec": 60
+      },
+      "grok-4.5": {
+        "inputPerM": 2,
+        "outputPerM": 6,
+        "tokensPerSec": 60
       }
     }
   },
   "capability": {
     "anthropic": {
+      "claude-opus-5-5": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
       "claude-opus-5": {
         "contextWindow": 1000000,
         "maxOutputTokens": 128000
@@ -183,6 +243,14 @@
         "maxOutputTokens": 128000
       },
       "claude-sonnet-5": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-sonnet-5-5": {
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000
+      },
+      "claude-haiku-5-5": {
         "contextWindow": 1000000,
         "maxOutputTokens": 128000
       },
@@ -239,14 +307,38 @@
       "gpt-5": {
         "contextWindow": 400000,
         "maxOutputTokens": 128000
+      },
+      "gpt-6.1-sol": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-6-luna": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
+      },
+      "gpt-6.1-terra": {
+        "contextWindow": 1050000,
+        "maxOutputTokens": 128000
       }
     },
     "gemini": {
+      "gemini-4-argon": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      },
       "gemini-3.8-flash": {
         "contextWindow": 1048576,
         "maxOutputTokens": 65536
       },
       "gemini-3.7-flash": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "gemini-3.6-flash": {
+        "contextWindow": 1048576,
+        "maxOutputTokens": 65536
+      },
+      "gemini-3.1-flash-lite": {
         "contextWindow": 1048576,
         "maxOutputTokens": 65536
       },
@@ -266,6 +358,11 @@
         "contextWindow": 1048576,
         "maxOutputTokens": 65536
       }
+    },
+    "xai": {
+      "grok-4.7": { "contextWindow": 500000, "maxOutputTokens": 128000 },
+      "grok-4.6": { "contextWindow": 500000, "maxOutputTokens": 128000 },
+      "grok-4.5": { "contextWindow": 500000, "maxOutputTokens": 128000 }
     }
   },
   "codingIndex": {
@@ -293,13 +390,14 @@
   },
   "toolModels": {
     "gemini": {
-      "pro": "gemini/gemini-3.1-pro-preview",
+      "pro": "gemini/gemini-4-argon",
       "flash": "gemini/gemini-3.8-flash",
       "flash-lite": "gemini/gemini-3.5-flash-lite"
     },
     "devin": {
-      "opus": "anthropic/claude-opus-5-5",
-      "sonnet": "anthropic/claude-sonnet-5-5"
+      "opus": "anthropic/claude-opus-5",
+      "sonnet": "anthropic/claude-sonnet-5",
+      "gemini": "gemini/gemini-3.7-flash"
     }
   }
 }
